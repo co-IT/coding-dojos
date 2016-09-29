@@ -1,0 +1,8 @@
+<md-toolbar color="primary">
+  <span>Vocab Trainer</span>
+</md-toolbar>
+
+<div class="app-constraint">
+  <vt-add-vocab (vocabSubmitted)="addVocab($event)"></vt-add-vocab>
+  <vt-vocabs-list [vocabs]="vocabBook.vocabs"></vt-vocabs-list>
+</div>
