@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Vocab } from '../../shared/';
 
 @Component({
@@ -7,16 +8,17 @@ import { Vocab } from '../../shared/';
   styleUrls: ['./add-vocab.component.css']
 })
 export class AddVocabComponent {
+  @ViewChild('form') form: FormGroup;
+  vocab: Vocab;
   @Output() vocabSubmitted: EventEmitter<Vocab> = new EventEmitter();
 
-  add(foreignword, translation, memnotechnicVerse) {
-    this.vocabSubmitted.emit(new Vocab(
-      foreignword.value,
-      translation.value,
-      memnotechnicVerse.value));
+  constructor() {
+    this.vocab = new Vocab('', '', '');
+  }
 
-      foreignword.value =
-      translation.value =
-      memnotechnicVerse.value = '';
+  add() {
+    this.vocabSubmitted.emit(this.vocab);
+    this.vocab = new Vocab('', '', '');
+    this.form.reset();
   }
 }

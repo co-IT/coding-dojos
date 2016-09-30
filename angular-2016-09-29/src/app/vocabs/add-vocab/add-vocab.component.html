@@ -1,5 +1,32 @@
-<md-input placeholder="Foreignword" #foreignword></md-input>
-<md-input placeholder="Translation" #translation></md-input>
-<md-input placeholder="Memnotechnic Verse" #memnotechnicVerse></md-input>
+<form #form="ngForm">
+  <md-input
+    placeholder="Foreignword"
+    #foreignword="ngModel"
+    name="foreignword"
+    [(ngModel)]="vocab.foreignword"
+    required>
+    <md-hint
+      color="warning"
+      *ngIf="foreignword.errors && (foreignword.dirty || foreignword.touched)">Please insert a value
+    </md-hint>
+  </md-input>
 
-<button md-raised-button (click)="add(foreignword, translation, memnotechnicVerse)">ADD</button>
+  <md-input
+    placeholder="Translation"
+    #translation="ngModel"
+    name="translation"
+    [(ngModel)]="vocab.translation"
+    required></md-input>
+
+  <md-input
+    placeholder="Memnotechnic Verse"
+    #mnemotechnicVerse="ngModel"
+    name="mnemotechnicVerse"
+    [(ngModel)]="vocab.mnemotechnicVerse"
+    required></md-input>
+
+  <button
+    md-raised-button
+    (click)="add()"
+    [disabled]="!form.valid">ADD</button>
+</form>
